@@ -13,6 +13,8 @@ class KaryawanController extends Controller
     public function index()
     {
         //
+        $karyawan = Karyawan::all();
+        return view('karyawan.index', compact('karyawan'));
     }
 
     /**
@@ -21,6 +23,7 @@ class KaryawanController extends Controller
     public function create()
     {
         //
+        return view('karyawan.create');
     }
 
     /**
@@ -77,8 +80,9 @@ class KaryawanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Karyawan $karyawan)
     {
-        //
+        $karyawan->delete();
+        return redirect()->route('karyawan.index')->with('success', 'Karyawan berhasil dihapus.');
     }
 }
